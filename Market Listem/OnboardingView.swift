@@ -16,22 +16,22 @@ struct OnboardingView: View {
         Page(
             id: 0,
             symbol: "house.fill",
-            title: "Evde ne var, bil",
-            description: "Düzenli kullandığın ürünlerin durumunu Var, Azaldı veya Bitti olarak takip et.",
+            title: String(localized: "Evde ne var, bil"),
+            description: String(localized: "Düzenli kullandığın ürünlerin durumunu Var, Azaldı veya Bitti olarak takip et."),
             tint: .green
         ),
         Page(
             id: 1,
             symbol: "arrow.triangle.2.circlepath",
-            title: "Eksikler listeye düşsün",
-            description: "Biten ürünler otomatik eklenir. Azalanları marketten önce tek dokunuşla listeye taşı.",
+            title: String(localized: "Eksikler listeye düşsün"),
+            description: String(localized: "Biten ürünler otomatik eklenir. Azalanları marketten önce tek dokunuşla listeye taşı."),
             tint: .orange
         ),
         Page(
             id: 2,
             symbol: "checkmark.circle.fill",
-            title: "Markette hız kazan",
-            description: "Alışveriş modunda aldıklarını işaretle; stok ve geçmiş kendiliğinden güncellensin.",
+            title: String(localized: "Markette hız kazan"),
+            description: String(localized: "Alışveriş modunda aldıklarını işaretle; stok ve geçmiş kendiliğinden güncellensin."),
             tint: .green
         )
     ]
@@ -82,7 +82,7 @@ struct OnboardingView: View {
                     withAnimation(.snappy) { selection += 1 }
                 }
             } label: {
-                Text(selection == pages.count - 1 ? "Başlayalım" : "Devam Et")
+                Text(selection == pages.count - 1 ? String(localized: "Başlayalım") : String(localized: "Devam Et"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
@@ -91,7 +91,11 @@ struct OnboardingView: View {
             .tint(.green)
             .padding(.horizontal, 24)
             .padding(.bottom, 28)
-            .accessibilityHint(selection == pages.count - 1 ? "Uygulamayı açar" : "Sonraki adıma geçer")
+            .accessibilityHint(
+                selection == pages.count - 1
+                    ? String(localized: "Uygulamayı açar")
+                    : String(localized: "Sonraki adıma geçer")
+            )
         }
         .interactiveDismissDisabled()
     }

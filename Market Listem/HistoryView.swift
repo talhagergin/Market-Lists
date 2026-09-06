@@ -55,7 +55,13 @@ struct HistoryView: View {
                                     .padding(.vertical, 4)
                                     .accessibilityElement(children: .contain)
                                     .accessibilityLabel(record.productName)
-                                    .accessibilityValue("\(record.quantity) adet, \(record.purchasedAt.formatted(date: .abbreviated, time: .shortened)) tarihinde alındı")
+                                    .accessibilityValue(
+                                        L10n.format(
+                                            "%lld adet, %@ tarihinde alındı",
+                                            record.quantity,
+                                            record.purchasedAt.formatted(date: .abbreviated, time: .shortened)
+                                        )
+                                    )
                                     .accessibilityAction(named: "Tekrar Ekle") {
                                         handleRepeatResult(
                                             InventoryService.addToShoppingList(named: record.productName, in: modelContext)
@@ -74,8 +80,8 @@ struct HistoryView: View {
 
     private func dayTitle(_ date: Date) -> String {
         let calendar = Calendar.current
-        if calendar.isDateInToday(date) { return "Bugün" }
-        if calendar.isDateInYesterday(date) { return "Dün" }
+        if calendar.isDateInToday(date) { return String(localized: "Bugün") }
+        if calendar.isDateInYesterday(date) { return String(localized: "Dün") }
         return date.formatted(.dateTime.day().month(.wide).year())
     }
 

@@ -27,7 +27,9 @@ struct ContentView: View {
         .tint(.green)
         .onReceive(NotificationCenter.default.publisher(for: .inventoryPersistenceError)) { notification in
             let message = notification.userInfo?["message"] as? String
-            activeIssue = AppIssue(message: message ?? "Değişiklik kaydedilemedi. Lütfen tekrar dene.")
+            activeIssue = AppIssue(
+                message: message ?? String(localized: "Değişiklik kaydedilemedi. Lütfen tekrar dene.")
+            )
         }
         .alert(item: $activeIssue) { issue in
             Alert(

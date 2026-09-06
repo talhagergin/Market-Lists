@@ -57,7 +57,7 @@ struct PersistenceSetup {
                 )
                 return PersistenceSetup(
                     container: fallback,
-                    warning: "Kayıtlı verilere erişilemedi. Bu oturumdaki değişiklikler kalıcı olmayacak."
+                    warning: String(localized: "Kayıtlı verilere erişilemedi. Bu oturumdaki değişiklikler kalıcı olmayacak.")
                 )
             } catch {
                 fatalError("SwiftData model container oluşturulamadı: \(error.localizedDescription)")

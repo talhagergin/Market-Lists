@@ -66,7 +66,7 @@ struct ProductDetailSheet: View {
         }
         .presentationDetents([.medium])
         .confirmationDialog(
-            "\(product.name) arşivlensin mi?",
+            L10n.format("%@ arşivlensin mi?", product.name),
             isPresented: $isConfirmingArchive,
             titleVisibility: .visible
         ) {

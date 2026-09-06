@@ -78,7 +78,7 @@ struct ShoppingListView: View {
                     .listStyle(.insetGrouped)
                 }
             }
-            .navigationTitle(isShoppingMode ? "Market" : "Market Listem")
+            .navigationTitle(isShoppingMode ? String(localized: "Market") : String(localized: "Market Listem"))
             .searchable(text: $searchText, prompt: "Ürün ara")
             .toolbar {
                 if !listedProducts.isEmpty && !isShoppingMode {
@@ -88,7 +88,7 @@ struct ShoppingListView: View {
                 }
                 if !listedProducts.isEmpty || isShoppingMode {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(isShoppingMode ? "Bitir" : "Alışverişe Başla") {
+                        Button(isShoppingMode ? String(localized: "Bitir") : String(localized: "Alışverişe Başla")) {
                             withAnimation(.snappy) {
                                 if isShoppingMode { shoppingSession.reset() }
                                 isShoppingMode.toggle()
@@ -142,16 +142,16 @@ struct ShoppingListView: View {
                 }
             }
         } label: {
-            Label(selectedCategory?.title ?? "Filtre", systemImage: "line.3.horizontal.decrease")
+            Label(selectedCategory?.title ?? String(localized: "Filtre"), systemImage: "line.3.horizontal.decrease")
         }
         .accessibilityLabel("Kategori filtresi")
-        .accessibilityValue(selectedCategory?.title ?? "Tüm kategoriler")
+        .accessibilityValue(selectedCategory?.title ?? String(localized: "Tüm kategoriler"))
     }
 
     private var header: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(isShoppingMode ? "ALIŞVERİŞ MODU" : "HAZIRLIK")
+                Text(isShoppingMode ? String(localized: "ALIŞVERİŞ MODU") : String(localized: "HAZIRLIK"))
                     .font(.caption.weight(.bold))
                     .foregroundStyle(.green)
                 Text(headerCountText)
@@ -180,9 +180,13 @@ struct ShoppingListView: View {
 
     private var headerCountText: String {
         if isShoppingMode {
-            return "\(shoppingSession.purchasedCount) / \(shoppingSession.totalCount(remainingCount: listedProducts.count)) alındı"
+            return L10n.format(
+                "%lld / %lld alındı",
+                shoppingSession.purchasedCount,
+                shoppingSession.totalCount(remainingCount: listedProducts.count)
+            )
         }
-        return "\(listedProducts.count) ürün kaldı"
+        return L10n.format("%lld ürün kaldı", listedProducts.count)
     }
 
     private var completedSection: some View {
@@ -206,7 +210,7 @@ struct ShoppingListView: View {
                 .frame(minHeight: 50)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(item.name)
-                .accessibilityValue("Alındı")
+                .accessibilityValue(String(localized: "Alındı"))
             }
         } header: {
             Label("ALINANLAR", systemImage: "checkmark.circle.fill")
@@ -225,7 +229,7 @@ struct ShoppingListView: View {
                         .contentTransition(.symbolEffect(.replace))
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("\(product.name) alındı")
+                .accessibilityLabel(L10n.format("%@ alındı", product.name))
 
                 ProductThumbnail(name: product.name, category: product.category, size: isShoppingMode ? 46 : 38)
 
@@ -245,7 +249,11 @@ struct ShoppingListView: View {
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(product.name)
-        .accessibilityValue(product.quantity > 1 ? "\(product.quantity) adet, \(product.category.title)" : product.category.title)
+        .accessibilityValue(
+            product.quantity > 1
+                ? L10n.format("%lld adet, %@", product.quantity, product.category.title)
+                : product.category.title
+        )
         .accessibilityHint("Detayları düzenlemek için çift dokun")
         .accessibilityIdentifier("product.row.\(ProductCatalog.normalize(product.name))")
         .accessibilityAction(named: "Alındı") { purchase(product) }

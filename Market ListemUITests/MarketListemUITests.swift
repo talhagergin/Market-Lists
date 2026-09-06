@@ -6,7 +6,7 @@ final class MarketListemUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = ["--ui-testing"]
+        app.launchArguments = ["--ui-testing", "-AppleLanguages", "(tr)", "-AppleLocale", "tr_TR"]
         app.launch()
     }
 
@@ -41,7 +41,7 @@ final class MarketListemUITests: XCTestCase {
 
     func testCaptureAppStoreScreenshots() {
         app.terminate()
-        app.launchArguments = ["--sample-data"]
+        app.launchArguments = ["--sample-data", "-AppleLanguages", "(tr)", "-AppleLocale", "tr_TR"]
         app.launch()
 
         XCTAssertTrue(app.navigationBars["Market Listem"].waitForExistence(timeout: 8))
@@ -55,6 +55,27 @@ final class MarketListemUITests: XCTestCase {
         app.buttons["Alışverişe Başla"].tap()
         XCTAssertTrue(app.navigationBars["Market"].waitForExistence(timeout: 5))
         captureScreenshot(named: "03-alisveris-modu")
+    }
+
+    func testEnglishLocalizationAndProductEntry() {
+        app.terminate()
+        app.launchArguments = ["--ui-testing", "-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+        app.launch()
+
+        let addButton = app.buttons["shopping.add.empty"]
+        XCTAssertTrue(addButton.waitForExistence(timeout: 8))
+        XCTAssertEqual(addButton.label, "Add Product")
+        addButton.tap()
+
+        XCTAssertTrue(app.staticTexts["What's Missing?"].waitForExistence(timeout: 5))
+        enterProductName("Milk")
+        XCTAssertEqual(app.buttons["product.add.button"].label, "Add to List")
+        app.buttons["product.add.button"].tap()
+
+        let milkRow = app.descendants(matching: .any).matching(
+            NSPredicate(format: "label == %@", "Milk")
+        ).firstMatch
+        XCTAssertTrue(milkRow.waitForExistence(timeout: 5))
     }
 
     private func addProduct(named name: String) {

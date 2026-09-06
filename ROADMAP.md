@@ -32,6 +32,7 @@
 
 - [x] App icon, launch görünümü ve mağaza görselleri
 - [x] Gizlilik metni, privacy manifest ve App Store metadata taslağı
+- [x] Türkçe ve İngilizce uygulama/Widget yerelleştirmesi
 - [ ] Gerçek cihaz performans, enerji ve erişilebilirlik kontrolleri
 - [ ] TestFlight geri bildirim turu ve ilk sürüm kapsam kilidi
 

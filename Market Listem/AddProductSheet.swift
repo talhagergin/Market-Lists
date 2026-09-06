@@ -86,7 +86,7 @@ struct AddProductSheet: View {
             Feedback.success()
             dismiss()
         case .alreadyListed(let product):
-            withAnimation { duplicateMessage = "\(product.name) zaten listende." }
+            withAnimation { duplicateMessage = L10n.format("%@ zaten listende.", product.name) }
             Feedback.selection()
         case .invalid:
             break

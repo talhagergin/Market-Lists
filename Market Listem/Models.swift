@@ -10,9 +10,9 @@ enum StockStatus: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .available: "Var"
-        case .low: "Azaldı"
-        case .outOfStock: "Bitti"
+        case .available: String(localized: "Var")
+        case .low: String(localized: "Azaldı")
+        case .outOfStock: String(localized: "Bitti")
         }
     }
 
@@ -32,17 +32,17 @@ enum ProductCategory: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .produce: "Meyve & Sebze"
-        case .dairy: "Süt Ürünleri"
-        case .protein: "Et & Protein"
-        case .bakery: "Fırın"
-        case .pantry: "Kuru Gıda"
-        case .beverages: "İçecek"
-        case .snacks: "Atıştırmalık"
-        case .cleaning: "Temizlik"
-        case .personalCare: "Kişisel Bakım"
-        case .household: "Ev"
-        case .other: "Diğer"
+        case .produce: String(localized: "Meyve & Sebze")
+        case .dairy: String(localized: "Süt Ürünleri")
+        case .protein: String(localized: "Et & Protein")
+        case .bakery: String(localized: "Fırın")
+        case .pantry: String(localized: "Kuru Gıda")
+        case .beverages: String(localized: "İçecek")
+        case .snacks: String(localized: "Atıştırmalık")
+        case .cleaning: String(localized: "Temizlik")
+        case .personalCare: String(localized: "Kişisel Bakım")
+        case .household: String(localized: "Ev")
+        case .other: String(localized: "Diğer")
         }
     }
 

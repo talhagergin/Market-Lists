@@ -14,13 +14,13 @@ enum PreviewData {
         let context = container.mainContext
 
         let samples: [(String, ProductCategory, StockStatus, Bool, Int)] = [
-            ("Süt", .dairy, .outOfStock, true, 2),
-            ("Yumurta", .protein, .outOfStock, true, 1),
-            ("Ekmek", .bakery, .outOfStock, true, 1),
-            ("Muz", .produce, .outOfStock, true, 6),
-            ("Kahve", .pantry, .low, false, 1),
-            ("Şampuan", .personalCare, .low, false, 1),
-            ("Deterjan", .cleaning, .available, false, 1)
+            (String(localized: "Süt"), .dairy, .outOfStock, true, 2),
+            (String(localized: "Yumurta"), .protein, .outOfStock, true, 1),
+            (String(localized: "Ekmek"), .bakery, .outOfStock, true, 1),
+            (String(localized: "Muz"), .produce, .outOfStock, true, 6),
+            (String(localized: "Kahve"), .pantry, .low, false, 1),
+            (String(localized: "Şampuan"), .personalCare, .low, false, 1),
+            (String(localized: "Deterjan"), .cleaning, .available, false, 1)
         ]
 
         for (name, category, status, isListed, quantity) in samples {

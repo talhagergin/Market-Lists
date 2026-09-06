@@ -144,7 +144,9 @@ struct ShoppingListWidgetView: View {
             .lowercased(with: Locale(identifier: "tr_TR"))
         let assets = [
             "sut": "ProductMilk", "yumurta": "ProductEgg", "ekmek": "ProductBread",
-            "kahve": "ProductCoffee", "tuvalet kagıdı": "ProductToiletPaper", "sampuan": "ProductShampoo"
+            "kahve": "ProductCoffee", "tuvalet kagıdı": "ProductToiletPaper", "sampuan": "ProductShampoo",
+            "milk": "ProductMilk", "egg": "ProductEgg", "eggs": "ProductEgg", "bread": "ProductBread",
+            "coffee": "ProductCoffee", "toilet paper": "ProductToiletPaper", "shampoo": "ProductShampoo"
         ]
         return assets.first { normalized == $0.key || normalized.contains($0.key) }?.value
     }

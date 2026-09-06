@@ -21,6 +21,9 @@ struct InventoryServiceTests {
         #expect(ProductCatalog.category(for: "Organik yumurta") == .protein)
         #expect(ProductCatalog.category(for: "Beyaz peynir") == .dairy)
         #expect(ProductCatalog.category(for: "Bilinmeyen ürün") == .other)
+        #expect(ProductCatalog.category(for: "Whole milk") == .dairy)
+        #expect(ProductCatalog.category(for: "Organic eggs") == .protein)
+        #expect(ProductCatalog.category(for: "Dish soap") == .cleaning)
     }
 
     @Test("Ürün görseli doğrudan eşleşir ve kategori fallback'i kullanır")
@@ -31,6 +34,7 @@ struct InventoryServiceTests {
         #expect(ProductCatalog.symbol(for: "Bilinmeyen ürün", category: .other) == ProductCategory.other.symbol)
         #expect(ProductCatalog.assetName(for: "Organik yumurta") == "ProductEgg")
         #expect(ProductCatalog.assetName(for: "Bilinmeyen ürün") == nil)
+        #expect(ProductCatalog.assetName(for: "Whole milk") == "ProductMilk")
     }
 
     @Test("Alışveriş oturumu ilerlemeyi ve tamamlananları takip eder")

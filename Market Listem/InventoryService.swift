@@ -36,7 +36,7 @@ enum InventoryService {
             return .restored(existing, previousStatus: previousStatus)
         }
 
-        let displayName = name.prefix(1).uppercased(with: Locale(identifier: "tr_TR")) + name.dropFirst()
+        let displayName = name.prefix(1).uppercased(with: .current) + name.dropFirst()
         let product = Product(
             name: displayName,
             normalizedName: normalizedName,

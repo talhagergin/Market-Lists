@@ -114,7 +114,7 @@ struct HomeView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 12) {
                 ForEach(rankedSuggestions) { suggestion in
                     Button {
-                        let result = InventoryService.addToShoppingList(named: suggestion.name, in: modelContext)
+                        let result = InventoryService.addToShoppingList(named: suggestion.localizedName, in: modelContext)
                         switch result {
                         case .alreadyListed:
                             Feedback.selection()
@@ -131,11 +131,11 @@ struct HomeView: View {
                     } label: {
                         HStack(spacing: 10) {
                             ProductThumbnail(
-                                name: suggestion.name,
-                                category: ProductCatalog.category(for: suggestion.name),
+                                name: suggestion.localizedName,
+                                category: ProductCatalog.category(for: suggestion.localizedName),
                                 size: 36
                             )
-                            Text(suggestion.name)
+                            Text(suggestion.localizedName)
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(.primary)
                                 .lineLimit(1)
@@ -146,7 +146,7 @@ struct HomeView: View {
                         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("\(suggestion.name) listeye ekle")
+                    .accessibilityLabel(L10n.format("%@ listeye ekle", suggestion.localizedName))
                     .accessibilityHint("Market listesine eklemek için çift dokun")
                 }
             }
@@ -219,8 +219,10 @@ struct HomeView: View {
 
     private var rankedSuggestions: [ProductCatalog.Suggestion] {
         ProductCatalog.quickSuggestions.sorted { lhs, rhs in
-            let leftCount = products.first { $0.normalizedName == ProductCatalog.normalize(lhs.name) }?.purchaseCount ?? 0
-            let rightCount = products.first { $0.normalizedName == ProductCatalog.normalize(rhs.name) }?.purchaseCount ?? 0
+            let leftNames = [lhs.name, lhs.localizedName].map { ProductCatalog.normalize($0) }
+            let rightNames = [rhs.name, rhs.localizedName].map { ProductCatalog.normalize($0) }
+            let leftCount = products.first { leftNames.contains($0.normalizedName) }?.purchaseCount ?? 0
+            let rightCount = products.first { rightNames.contains($0.normalizedName) }?.purchaseCount ?? 0
             return leftCount > rightCount
         }
     }

@@ -5,6 +5,18 @@ enum ProductCatalog {
         let name: String
         let emoji: String
         var id: String { name }
+
+        var localizedName: String {
+            switch name {
+            case "Süt": String(localized: "Süt")
+            case "Yumurta": String(localized: "Yumurta")
+            case "Ekmek": String(localized: "Ekmek")
+            case "Kahve": String(localized: "Kahve")
+            case "Tuvalet Kağıdı": String(localized: "Tuvalet Kağıdı")
+            case "Şampuan": String(localized: "Şampuan")
+            default: name
+            }
+        }
     }
 
     static let quickSuggestions = [
@@ -14,16 +26,16 @@ enum ProductCatalog {
     ]
 
     private static let categories: [ProductCategory: [String]] = [
-        .produce: ["elma", "armut", "muz", "portakal", "mandalina", "limon", "çilek", "üzüm", "avokado", "domates", "salatalık", "biber", "patates", "soğan", "sarımsak", "havuç", "kabak", "patlıcan", "marul", "roka", "maydanoz"],
-        .dairy: ["süt", "yoğurt", "ayran", "kefir", "peynir", "kaşar", "labne", "tereyağı", "krema"],
-        .protein: ["yumurta", "tavuk", "et", "balık", "kıyma", "sucuk", "salam", "ton balığı"],
-        .bakery: ["ekmek", "simit", "poğaça", "lavaş", "tortilla", "hamburger ekmeği"],
-        .pantry: ["kahve", "çay", "makarna", "erişte", "pirinç", "bulgur", "un", "şeker", "tuz", "zeytinyağı", "ayçiçek yağı", "salça", "mercimek", "nohut", "fasulye", "yulaf", "mısır gevreği"],
-        .beverages: ["su", "maden suyu", "soda", "meyve suyu", "kola", "gazoz", "limonata"],
-        .snacks: ["çikolata", "bisküvi", "cips", "kraker", "kuruyemiş", "dondurma", "gofret"],
-        .cleaning: ["deterjan", "çamaşır deterjanı", "bulaşık deterjanı", "çamaşır suyu", "yumuşatıcı", "bulaşık tableti", "yüzey temizleyici", "sünger", "çöp poşeti"],
-        .personalCare: ["şampuan", "saç kremi", "duş jeli", "sabun", "diş macunu", "diş fırçası", "deodorant", "tıraş köpüğü", "tuvalet kağıdı"],
-        .household: ["peçete", "kağıt havlu", "ıslak mendil", "folyo", "streç film", "pişirme kağıdı", "saklama poşeti", "pil", "ampul"]
+        .produce: ["elma", "armut", "muz", "portakal", "mandalina", "limon", "çilek", "üzüm", "avokado", "domates", "salatalık", "biber", "patates", "soğan", "sarımsak", "havuç", "kabak", "patlıcan", "marul", "roka", "maydanoz", "apple", "pear", "banana", "orange", "lemon", "strawberry", "grape", "avocado", "tomato", "cucumber", "pepper", "potato", "onion", "garlic", "carrot", "zucchini", "eggplant", "lettuce", "parsley"],
+        .dairy: ["süt", "yoğurt", "ayran", "kefir", "peynir", "kaşar", "labne", "tereyağı", "krema", "milk", "yogurt", "cheese", "butter", "cream"],
+        .protein: ["yumurta", "tavuk", "et", "balık", "kıyma", "sucuk", "salam", "ton balığı", "egg", "eggs", "chicken", "meat", "fish", "ground beef", "tuna"],
+        .bakery: ["ekmek", "simit", "poğaça", "lavaş", "tortilla", "hamburger ekmeği", "bread", "bagel", "pastry", "wrap", "burger bun"],
+        .pantry: ["kahve", "çay", "makarna", "erişte", "pirinç", "bulgur", "un", "şeker", "tuz", "zeytinyağı", "ayçiçek yağı", "salça", "mercimek", "nohut", "fasulye", "yulaf", "mısır gevreği", "coffee", "tea", "pasta", "rice", "flour", "sugar", "salt", "olive oil", "lentils", "chickpeas", "beans", "oats", "cereal"],
+        .beverages: ["su", "maden suyu", "soda", "meyve suyu", "kola", "gazoz", "limonata", "water", "sparkling water", "juice", "cola", "lemonade"],
+        .snacks: ["çikolata", "bisküvi", "cips", "kraker", "kuruyemiş", "dondurma", "gofret", "chocolate", "cookies", "chips", "crackers", "nuts", "ice cream", "wafer"],
+        .cleaning: ["deterjan", "çamaşır deterjanı", "bulaşık deterjanı", "çamaşır suyu", "yumuşatıcı", "bulaşık tableti", "yüzey temizleyici", "sünger", "çöp poşeti", "detergent", "laundry detergent", "dish soap", "bleach", "fabric softener", "dishwasher tablet", "surface cleaner", "sponge", "trash bag"],
+        .personalCare: ["şampuan", "saç kremi", "duş jeli", "sabun", "diş macunu", "diş fırçası", "deodorant", "tıraş köpüğü", "tuvalet kağıdı", "shampoo", "conditioner", "shower gel", "soap", "toothpaste", "toothbrush", "deodorant", "shaving foam", "toilet paper"],
+        .household: ["peçete", "kağıt havlu", "ıslak mendil", "folyo", "streç film", "pişirme kağıdı", "saklama poşeti", "pil", "ampul", "napkin", "paper towel", "wet wipes", "foil", "plastic wrap", "baking paper", "storage bag", "battery", "light bulb"]
     ]
 
     private static let productEmojis: [String: String] = [
@@ -61,12 +73,12 @@ enum ProductCatalog {
     ]
 
     private static let productAssets: [String: String] = [
-        "süt": "ProductMilk",
-        "yumurta": "ProductEgg",
-        "ekmek": "ProductBread",
-        "kahve": "ProductCoffee",
-        "tuvalet kağıdı": "ProductToiletPaper",
-        "şampuan": "ProductShampoo"
+        "süt": "ProductMilk", "milk": "ProductMilk",
+        "yumurta": "ProductEgg", "egg": "ProductEgg", "eggs": "ProductEgg",
+        "ekmek": "ProductBread", "bread": "ProductBread",
+        "kahve": "ProductCoffee", "coffee": "ProductCoffee",
+        "tuvalet kağıdı": "ProductToiletPaper", "toilet paper": "ProductToiletPaper",
+        "şampuan": "ProductShampoo", "shampoo": "ProductShampoo"
     ]
 
     static func normalize(_ name: String) -> String {
