@@ -23,7 +23,7 @@
 - [ ] Gizlilik politikasını herkese açık HTTPS adresinde yayınlama
 - [ ] Destek URL'si ve iletişim e-postası ekleme
 - [ ] App Privacy yanıtlarını “veri toplanmıyor” modeline göre doldurma
-- [ ] 6.7 inç iPhone ekran görüntülerini yükleme
+- [ ] Hazırlanan 6.9 inç iPhone ekran görüntülerini yükleme
 - [ ] Yaş derecelendirmesi, telif ve fiyatlandırmayı tamamlama
 
 ## TestFlight kapsam kilidi
